@@ -28,14 +28,14 @@ Here is a flow chart of the complete system. Please use this in combination with
 
 0. First make sure you have matplotlib in your enviroment, you can also use numpy if you want to, but it isn't needed. 
 
-1. Using the desired velocity, `desired_vel`, and the current velocity, `self.v`, it’s useful to calculate the difference between the two, representing the error of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find the required acceleration. 
+1. Using the **desired velocity, `desired_vel`, and the current velocity, `self.v`**, it’s useful to **calculate the difference between the two, representing the error of our controller**. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find the required acceleration. 
     
-    Write a function, `calculate_desired_acceleration`, that returns the error and desired acceleration, only using the proportional term of the controller( no `K_I` or `K_D` ). Please refer to the provided image for help. In the image C(command) is desired acceleration in our project.
+    Write a function, `calculate_desired_acceleration`, that calculates the **error** and then uses that to calculate the desired acceleration. For this step only use the proportional term, do not use the other two terms. Please refer to the provided image for help. In the image C(command) is desired acceleration in our project.
     
 
-2. For the car to reach the desired acceleration you calculated it needs to be converted to a value for the motor. In this simplified model we’ll convert it straight to a force using Newton’s second law, and then to a throttle percentage(-1 to 1) using a max throttle force. 
+2. For the car to reach the desired acceleration you calculated it needs to be converted to a value for the motor. In this simplified model we’ll **convert it straight to a force using Newton’s second law**, and then **to a throttle percentage(-1 to 1) using a max throttle force**. 
     
-    Write a function, `accel_to_throttle`, that returns a throttle percentage as a float between -1 and 1.
+    Write a function, `accel_to_throttle`, that returns a throttle percentage. First find the force needed using the desired acceleration and mass, Newtons second law. Then use your calculated **force** and the **given max throttle force** to compute a percent, the **throttle percent**. Make sure this is between -1 and 1 before returning. 
     
 
 3. Build a run script using matplotlib to make two plots one of your car’s velocity and one of the error over each time step. If you know another way to visualize data than the one described below go ahead, this is just to help.
@@ -47,14 +47,15 @@ Here is a flow chart of the complete system. Please use this in combination with
 
 4. Use your run.py to tune the `K_P` constant so that your car’s velocity converges closest to the desired velocity. 
     - Start low, below 1 with constants. 
-    - Note if you are able to get it to reach the desired velocity. In the first linked PID video, they talk about why this happens. 
-    - Before moving on either think about it yourself or rewatch the video or google "Steady state error pid" until you understand what is causing the velocity to not reach the desired velocity. Hint: Look at the car model's code to see how it calculates acceleration at each step. 
+    - Note if you are able to get it to reach the desired velocity. In the first linked PID video, they talk about why this happens. It's called steady state error. 
+    - Before moving on either think about it yourself, rewatch the video, or google "Steady state error pid" until you understand what is causing the velocity to not reach the desired velocity. Hint: Look at the car model's code to see how it calculates acceleration at each step. 
 
-5. Refer back to the PID equation to now implement the integral term of the controller. You’ll want to use the `self.net_integral` so you can track the error as it accumulates over multiple steps. 
-    - Using run.py once more tune your controller towards the dseirev velocity. Note how is you graph is different this time.
+5. Refer back to the PID equation to now implement the integral term of the controller. You’ll want to use the `self.net_integral` so you can **sum the error as it accumulates over every single step**. This is the summation shown in the **equation sheet provided.** 
+    - Using run.py once more tune your controller towards the desired velocity. Note how is you graph is **different this time.**
 
-6. Now implement the deritvative term. You’ll want to use `self.error_prev` .
+6. Now implement the deritvative term. You’ll want to use `self.error_prev`. Wiht the preivous error you can calculate the change of the error, shown as dt in the equation sheet. 
     - Once more use run.py and mess around with the values of all three constants. Try and understand what each does.
+    - You will likely run into a bug around your **newly added code**. Think about the **first step** of your code, and what each varaible in this new code is during that first step. 
 
 7. Look up a PID tuning table to compare and contrast your observations to the actual functions of constants. 
     - Change the desired velocity, `des_v`, to multiple different values and use the table to help you tune the controller. 
