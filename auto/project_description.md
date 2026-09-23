@@ -2,7 +2,7 @@
 
 ![PID Math](./pid-equation-all-terms.png)
 
-The PID controller(above) uses 3 terms with 3 tuned constants, to compute a command that minimizes error.  
+The PID controller(above) uses 3 terms with 3 tuned constants, to compute a command that minimizes error. 
 
 ### Intro
 
@@ -24,11 +24,13 @@ The needed understanding for this project is: Integral is the TOTAL error throug
 
 **PROJECT GOAL**: Given a simplified 1-dimensional car model, `Car1D`. Build a PID controller which makes the car’s velocity converge toward a desired velocity. Use provided equation above for reference throughout this project. 
 
+Here is a flow chart of the complete system. Please use this in combination with the provided equations in the top image. Each term in the flowchart is shown in the equation sheet. ![PID FLOW](./flowchart.drawio.png)
+
 0. First make sure you have matplotlib in your enviroment, you can also use numpy if you want to, but it isn't needed. 
 
-1. Using the desired velocity, `des_v`, and the current velocity, `self.v`, it’s useful to calculate the difference between the two, representing the error of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find the required acceleration. 
+1. Using the desired velocity, `desired_vel`, and the current velocity, `self.v`, it’s useful to calculate the difference between the two, representing the error of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find the required acceleration. 
     
-    Write a function, `calculate_des_accel`, that returns the error and acceleration, only using the proportional term of the controller( no `K_I` or `K_D` ).
+    Write a function, `calculate_desired_acceleration`, that returns the error and desired acceleration, only using the proportional term of the controller( no `K_I` or `K_D` ). Please refer to the provided image for help. In the image C(command) is desired acceleration in our project.
     
 
 2. For the car to reach the desired acceleration you calculated it needs to be converted to a value for the motor. In this simplified model we’ll convert it straight to a force using Newton’s second law, and then to a throttle percentage(-1 to 1) using a max throttle force. 
@@ -37,9 +39,10 @@ The needed understanding for this project is: Integral is the TOTAL error throug
     
 
 3. Build a run script using matplotlib to make two plots one of your car’s velocity and one of the error over each time step. If you know another way to visualize data than the one described below go ahead, this is just to help.
-    -  Create two lists to track your velocity, and error. Make sure you also store the time for your x-axis.
-    - Create a loop that fills your two lists with their correct data over the number of `STEPS`. Use methods of the `car` instance to get data.
+    -  Create three lists to track your velocities, errors, and times.
+    - Create a loop that fills your two lists with their correct data over the number of `STEPS`. Use methods you built of the `car` instance to get data. Make sure to use `car.update` with throttle as an input to update all the state variables.
     - Build two plots using [matplotlib.pyplot](https://matplotlib.org/stable/tutorials/pyplot.html) showing your data. 
+        - Error over time and Velocity over Time 
     - Both of your graphs should converge to a specific value if done correctly. 
 
 4. Use your run.py to tune the `K_P` constant so that your car’s velocity converges closest to the desired velocity. 
