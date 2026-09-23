@@ -2,7 +2,7 @@
 This project is a step by step idea of how a data project would work. Using a parquet file provided, you must either derive or graph what is asked of you. All the necessary information is provided either in this or the parquet file. Submit your work on a PDF. If you are stuck on a step, please write down your approach and where you got stuck.
 
 1. Using parquet logic, forward fill and print all the values in a table format from the file. Provide a screenshot from the time stamp 15s-30s. 
-2. a) Using matplotlib, graph the speed vs time. Refer to this document to know which column means what. Use that to find the speed of the car at 10s.
+2. a) Using matplotlib, graph the speed vs time. Refer to the [data_columns.csv](https://github.com/formulaslug/fs-5-software-intro-projects/blob/main/data/data_columns.csv) to know which column means what. Use that to find the speed of the car at 10s.
 3. Find out how many laps the car drove as well as the start and end time for each lap. Provide a screenshot of your method along with an explanation of how you went about finding this.
 4. Give a time frame for when the car is accelerating, braking, and coasting. Explain how you found these values out. Then plot those states over time (either on three different graphs or one with different colors).
 5. Using the lap times found from part 3, determine the max speed, max acceleration, time spent accelerating, and time spent coasting. 
