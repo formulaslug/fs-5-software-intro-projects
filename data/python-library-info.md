@@ -8,12 +8,12 @@
 
 A concept shared across multiple different data parsing libraries is the ```DataFrame```. It is described in terms of rows and columns. Every column (known in Polars as ```Series```) has a name/id and a datatype (int 32, float 64, string, etc.) and the entire ```DataFrame``` has a number of rows (Each column must have the same # of rows). This looks something like:
 
-![alt text]<img width="402" height="219" alt="1212" src="https://github.com/user-attachments/assets/f2aca741-bd65-4259-afd8-b1b0dca9a3b5" />
+<img width="402" height="219" alt="1212" src="https://github.com/user-attachments/assets/f2aca741-bd65-4259-afd8-b1b0dca9a3b5" />
 
 
 Our data tends to look more like:
 
-![alt text]<img width="1552" height="330" alt="123" src="https://github.com/user-attachments/assets/2f42ef67-ae7e-45bf-bfb4-9a11191eabe5" />
+<img width="1552" height="330" alt="123" src="https://github.com/user-attachments/assets/2f42ef67-ae7e-45bf-bfb4-9a11191eabe5" />
 
 <h2 id="0"> Finding the data you want </h2>
 
@@ -123,7 +123,7 @@ plt.show()
 ```
 Here is what that lookes like:
 
-![alt text]<img width="640" height="480" alt="hi-1" src="https://github.com/user-attachments/assets/f38dcc46-3bd4-49ae-a5d5-b43364008ed2" />
+<img width="640" height="480" alt="hi-1" src="https://github.com/user-attachments/assets/f38dcc46-3bd4-49ae-a5d5-b43364008ed2" />
 
 
 There are multiple different types of plots you can use:
