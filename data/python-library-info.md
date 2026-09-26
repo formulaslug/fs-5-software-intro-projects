@@ -108,7 +108,7 @@ s.sample(n = 2, with_replacement = False) # Samples 2 values (Returns a Series)
 ```
 
 # MatPlotLib in FS
-To display parquet data in a more readable way, we use something called matplotlib. It is another helpful python library that we use in FS. You can either set up data manually, or pull from a given file. Here is an exmaple of what a graph with given data would look like: 
+To display parquet data in a more readable way, we use something called matplotlib. It is another helpful python library that we use in FS. You can either set up data manually, or pull from a given file. Here is an example of what a graph with given data would look like: 
 
 ```python
 import matplotlib.pyplot as plt
@@ -121,7 +121,7 @@ plt.xlabel("X Axis Label")
 plt.ylabel("Y Axis Label")
 plt.show()
 ```
-Here is what that lookes like:
+Here is what that looks like:
 
 <img width="640" height="480" alt="hi-1" src="https://github.com/user-attachments/assets/f38dcc46-3bd4-49ae-a5d5-b43364008ed2" />
 
@@ -135,7 +135,7 @@ plt.hist() #histogram
 plt.pie() #pie chart
 ```
 
-Here is an exmaple with a parquet file: 
+Here is an example with a parquet file: 
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -148,7 +148,7 @@ You can choose which parquet columns to use as your X and Y axis.
 
 # Numpy
 
-Numpy is the python library used for data analysis and heaiver math. It lets you complete common math functions on data sets or arrays. Here is a quick look at how NumPy simplifies math compared to a standard Python list:
+Numpy is the python library used for data analysis and heavier math. It lets you complete common math functions on data sets or arrays. Here is a quick look at how NumPy simplifies math compared to a standard Python list:
 ```python
 import numpy as np
 
@@ -160,7 +160,7 @@ numpy_array = np.array([1, 2, 3])
 print(numpy_array * 2)
 # output is [2, 4, 6]
 ```
-Some examples of numpys usage:
+Some examples of numpys functions:
 ```python
 np.add() 
 np.subtract()
