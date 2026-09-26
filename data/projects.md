@@ -4,13 +4,13 @@ This project is a step by step idea of how a data project would work. Using a pa
 ## Our car
 The data we will be using is from FS-3, our car from 2024-2025. This data was collected from the Norcal Shootout in 2025, a practice event to test our car more. The specific parquet I have provided came from Rolling Resistance tests. Our car was, and will always be electric. A motor controller (the SME channels) reports motor RPM, torque demand, and motor/controller temps. An accumulator pack, (the ACC channels) report pack voltage, current, per-cell volage, temperature across segments, and state of charge.
 
-**The IMU**
+**The IMU**  
 The vehicle dynamics module has an intertial inertial unit on board, the VDM X/Y/Z AXIS ACCELERATION (in g's) and the VDM_X/Y/Z AXIS YAW RATE (in °/s) come from it. This is an independent way of seeing how the car is physically doing, separate from the motor signal or GPS. If the car brakes hard, you can see it in the acceleration axes without needing to check the brake sensors at all; if it's cornering, the yaw rate would show it. This will come in handy during your intro project.
 
-**GPS**
+**GPS**  
 VDM_GPS_Latitude and VDM_GPS_Longitude don't just tell you where the car is in the world, but can also show you where the car is, especially in a fixed area (eg a track). When plotted against each other can show the shape of the track the car drove. GPS also gives you speed (VDM_GPS_SPEED measured in MPH!!) and altitude, which you can use to cross check during your project. The values from the GPS speed are less accurate, as they transmit less frequently compared to 'SME_TRQSPD_Speed.'
 
-**Brake Data**
+**Brake Data**  
 There are three different brake related signals. ETC_STATUS_BRAKELIGHT is a simple on/off flag for when the brake light is lit, which is a clear indicator of when the car is braking. ETC_STATUS_BRAKE_SENSE_VOLTAGE tells you more; it's the voltage of the brake's sensor. It moves proportionally with how hard the brake is pressed. TMAIN_DATA_BRAKES_F and TMAIN_DATA_BRAKES_R go further, giving separate front and rear brake pressure; however that data may not be useful for this project.
 
 ## Onboarding Project Steps
