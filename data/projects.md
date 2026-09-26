@@ -34,13 +34,13 @@ The motor and wheel are connected by a sprocket + chain reduction: 12 teeth on t
 
 Now we need to convert wheel rpm into angular velocity, which is measured in radians per second. 
 
-$ω =wRPM * (2pi/60)$
+$ω = wRPM * (2pi/60)$
 
 Finally, we need to convert angular velocity into a linear ground speed. Think about a ferris wheel, if you were standing in the middle, you are barely moving while the whole thing spins fast. If you are standing by the edge, you are covering more ground at the same spin rate, just a faster speed, since you are farther from the center. The same can be applied to a spinning wheel. The outside edge of the tire is a fixed distance from the center. Now that you know how fast the wheel is spinning, multiplying by the radius will give you the speed of the edge of the wheel. Since the car grips the road, the spot where the tire touches the pavement moves across the ground at the same speed - which is the car's speed.
 
 This gives you a final equation of:
 
-$v = wRPM * GR * (2pi/60) * WR$
+$v = mRPM * GR * (2pi/60) * WR$
 
 *where v is your final speed, wRPM is wheel RPM, GR is gear ratio, and WR is wheel radius*
 
