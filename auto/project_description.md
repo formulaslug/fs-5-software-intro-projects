@@ -4,19 +4,32 @@
 
 The PID controller(above) uses 3 terms with 3 tuned constants, to compute a command that minimizes error. 
 
-### Intro
+### Intro 
 
-This project is to give you an introduction on part of what we do in autonomous. This will focus on the controls planning part of our software stack. We do many other projects in autonomous, so if you don't like this don't worry we have many more options. 
+As the autonomous team we aim to build a working driverless system for the 2027 Driverless event this June at competition. In order to complete this we need to build a working software stack, manage hardware integration with other teams, and most importantly follow all FSAE rules.
+Here is a high level overview of our current software stack:
+1. **Perception** which includes monocular depth estimation and object detection using YOLACT edge.
+   - Using our camera we are able to detect cone locations, find the distance of cones, and classify each cone as a specific type.
+2. **Simultaneous Localization And Mapping(SLAM)** which builds a local map and global map of all cones
+   - Using our **Perception** data we can build a map around us, and we can form a larger global map as we continue through the track.
+3. **Path Planning** which builds a set of waypoints for our car to follow.
+   - Using our **SLAM** cone map data we can use cost functions and midpoint algorithms to find a path through the cones. 
+4. **Control Planning** which outputs the final vehicle commands to the motor and actuators using a PID longitudinal controller and Pure Pursuit Lateral controller.
+   - Using our waypoints from **Path Planning** we can compute our car's needed acceleration and yaw to follow the path at our desired speed.
 
-There are two templates in this folder that can help you start, the instructions will refer to parts of those specific templates although you're free to do your own thing. We have linked resources to help, but if you ever need more I defintely suggest just googling, the topics in this project are very well covered online and there are tons of helpful resources. 
+In this project we'll have you implement a basic PID controller, which is used commonly as an easy approach to control planning in a software stack. PID controllers are longitudinal meaning they focus on maintaining a speed, not focusing on the lateral control which is the steering. PID controllers are popular outside this use, they can be used in any scenario to approach and follow a desired value you want, in our case a desired velocity. 
+
+If this were a project as part of the team rather than onboarding, it may be followed up with creating a lateral controller, building tests, debugging, adding code safety features, and integrating with the full stack. 
+
+There are two templates in this folder that will help you start, the instructions will refer to parts of those specific templates although you're free to do your own thing. We have linked resources to help, but if you ever need more I definitely suggest just googling, the topics in this project are very well covered online and there are tons of helpful resources. 
 
 ### Brief on PID Controllers:
 
-Before building I reccomend watching this [matlab video](https://www.mathworks.com/discovery/pid-control.html) on PID controllers once through, if you don't understand it immediately don't worry. Completing this project will help you have a solid grasp on PID controllers, which are a fundamental yet simple control method used in many machines. 
+Before building I recommend watching this [matlab video](https://www.mathworks.com/discovery/pid-control.html) on PID controllers once through, if you don't understand it immediately don't worry. Completing this project will help you have a solid grasp on PID controllers, which are a fundamental yet simple control method used in many machines. 
 
 ### If you haven’t taken Calculus:
 
-Understanding what a derivative and integral are conceptually is important to fully understanding how PID controllers work. Here is a crash course by the [Organic Chemistry Tutor](https://www.youtube.com/watch?v=WsQQvHm4lSw&t=434s), I reccomend to skip to 17:00 and watch his description of the two.
+Understanding what a derivative and integral are conceptually is important to fully understanding how PID controllers work. Here is a crash course by the [Organic Chemistry Tutor](https://www.youtube.com/watch?v=WsQQvHm4lSw&t=434s), I recommend to skip to 17:00 and watch his description of the two.
 
 The needed understanding for this project is: Integral is the TOTAL error throughout a run measured by the area accumulated under a curve measuring error at each time step. And the derivative is HOW FAST the error is increasing or decreasing measured by the slope.
 
@@ -28,10 +41,9 @@ Here is a flow chart of the complete system. Please use this in combination with
 
 0. Before you start do the following:
    - Have matplotlib and numpy installed in your environment. 
-   - Read all code and docstrings in the templates. If you don't understand the code, reach out to Dylan Price on slack. 
+   - Read all code and docstrings in the templates. If you don't understand the code, reach out to Dylan Price, or message in the auto thread marked for onboarding questions. 
    - **For every function implementation please refer to the equation image for help**.
      - In the equation sheet C(command) is desired acceleration in our project as that is what we are trying to control.
-   - If you are on VS Code turn off the ai copilot in the bottom right, it will try to autofill the code in for you
 
 1. Using the desired velocity, `desired_v`, and the current velocity, `car["v"]`, **calculate the difference** between the two, to find **error** of our controller. This error is useful as it will be used to calculate how much acceleration we need to reach the desired velocity, given our current velocity. Your first controller iteration will use a constant, `K_P`, proportional to the error to find this **desired acceleration**. 
     
@@ -74,15 +86,15 @@ Here is a flow chart of the complete system. Please use this in combination with
     - Implement a stopping point into the PID controller, slows to a stop by a certain distance. 
     - Research gain scheduling for pid’s and implement into your system.
     - Research pid integral windup, find at what constants this happens in your controller and try to fix it.
-    - Add in a additional forces against the car, increasing/decreasing the friction in intervals throughout the steps. Figure out how to minimize velocity instability during the increased friction. 
+    - Add in additional forces against the car, increasing/decreasing the friction in intervals throughout the steps. Figure out how to minimize velocity instability during the increased friction. 
 
 9.  **Optional Machine Learning Extension**
     
-    **Goal**: Build a linear regression model trained on your PID data, to predict the desired acceleration given the current velocity and desired velocity. 
+    **Goal**: Build a basic undertanding of ML concepts, such as tensors, training loops, loss, etc... Build a linear regression model trained on your PID data, to predict the desired acceleration given the current velocity and desired velocity. 
 
-    - If you have a better/different machine learning application using PID data generated from your project I encourage you to try that instead. Espicially if it makes more sense to you. 
+    - If you have a better/different machine learning application using PID data generated from your project I encourage you to try that instead. Especially if it makes more sense to you. 
 
-    - If you haven’t worked with machine learning before, I reccomend learning [here](https://www.learnpytorch.io/00_pytorch_fundamentals/). The first two sections 00 and 01 walk you through building a linear regression model. Build their training, plotting, and model first so you can understand everything. Then adapt it or build the pid data one. 
+    - If you haven’t worked with machine learning before, I recommend learning [here](https://www.learnpytorch.io/00_pytorch_fundamentals/). The first two sections 00 and 01 walk you through building a linear regression model. Build their training, plotting, and model first so you can understand everything. Then adapt it or build the pid data one. 
    
     **Advice:**
     
